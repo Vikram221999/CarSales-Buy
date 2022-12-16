@@ -12,7 +12,8 @@ import { UsersService } from '../users.service';
 })
 export class LoginComponent implements OnInit {
 
-  
+  // Hello vikram Is git working??
+  type2:String = "Vikram";
   type:string ="Password"
   isText: boolean=false;
   eyeIcon:string="fa-eye-slash";
