@@ -21,6 +21,7 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CarinfoComponent } from './carinfo/carinfo.component';
 import { CookieService } from 'ngx-cookie-service';
+import { MyAccountComponent } from './my-account/my-account.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +34,8 @@ import { CookieService } from 'ngx-cookie-service';
     DashboardComponent,
     CardetailsComponent,
     MyProfileComponent,
-    CarinfoComponent
+    CarinfoComponent,
+    MyAccountComponent
   ],
   imports: [
     BrowserModule,

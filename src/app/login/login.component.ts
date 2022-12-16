@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { first } from 'rxjs';
 import ValidateForm from '../helper/ValidateForm';
@@ -13,16 +14,22 @@ import { UsersService } from '../users.service';
 export class LoginComponent implements OnInit {
 
   // Hello vikram Is git working??
-  type2:String = "Vikram";
+  
   type:string ="Password"
   isText: boolean=false;
   eyeIcon:string="fa-eye-slash";
+
+
+  notFound:boolean = false;
+  isChecked=false;
 
   loginForm!:FormGroup;
 
   constructor(private usersService: UsersService,
      private fb:FormBuilder,
-     private cookies : CookieService) { }
+     private cookie : CookieService,
+     private router:Router,
+     private route : ActivatedRoute) { }
 
   ngOnInit(): void {
     this.loginForm =this.fb.group({
@@ -38,29 +45,71 @@ export class LoginComponent implements OnInit {
   }
   get f() { return this.loginForm.controls; }
 
+  inCorrect:boolean=false;
   onLogin(){
-    if(this.loginForm.valid){
-      console.log(this.loginForm.value);
-      this.usersService.login(this.f['email'].value, this.f['userPassword'].value).pipe(first()).subscribe({
-      // this.usersService.login(this.loginForm.).subscribe({
+    if (!this.loginForm.valid) {
+      alert("UserName or Password Incorrect");
+      return;
+    } else {
+     
+      //this.inCorrect = false;
+      this.notFound = false;
+      
+        this.usersService.login(this.loginForm.value.email).subscribe(
+          (data) => {
+            if (
+              data?.userPassword == this.loginForm.value.userPassword &&
+              data?.email == this.loginForm.value.email)
+             {
+         
+              this.inCorrect = false;
+              this.notFound = false;
+              this.cookie.set('email', `${data?.email}`);
+               console.log(this.loginForm.value);
+             
+              this.cookie.set('userId', `${data?.userId}`);
+              this.router.navigate(['dashboard']);
+              this.usersService.setSideMenuView(Object.keys(this.cookie.getAll()).length != 0);
+            } else {
+              this.inCorrect = true;
+            }
+          },
+          (error) => {
+            if (error?.status == 404) {
+
+              this.notFound = true;
+            }
+          }
+        );
+
+
+
+
+//     if(this.loginForm.valid){
+//       console.log(this.loginForm.value);
+//       this.usersService.login(this.f['email'].value, this.f['userPassword'].value).pipe(first()).subscribe({
+      
         
-        next: (res: any) => {
-          alert(res.message)
-        }, 
-        error: (err: any) => {
-          // alert(err?.error.message)
-          alert(err.error.message);
+//         next: (res: any) => {
+//           alert(res.message)
+//         }, 
+//         error: (err: any) => {
+          
+//           alert(err.error.message);
+//       }
+//     });
+//     }
+//     else{
+// console.log("Form is not valid");
+
+     
+//       ValidateForm.validateFormFields(this.loginForm);
+//       alert("Your form is invalid is Invalis")
+//     }
+//   }
+//
+        }
       }
-    });
     }
-    else{
-console.log("Form is not valid");
-
-      //throw the error using toaster and with required fiels
-      ValidateForm.validateFormFields(this.loginForm);
-      alert("Your form is invalid is Invalis")
-    }
-  }
 
 
-}

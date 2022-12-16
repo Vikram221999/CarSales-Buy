@@ -38,7 +38,7 @@
                                 <a id="forget" class="font-weight-bold">Forget Password?</a>
                             </div>
                             <div class="form-group">
-                            <button (click)="onLogin()"   routerLink="/dashboard" type="submit" class="btn btn-primary btn-block mt-4 w-100">Login</button>
+                            <button (click)="onLogin()"   type="submit" class="btn btn-primary btn-block mt-4 w-100" [disabled]="loginForm.invalid">Login</button>
                         </div>
                             <div class="tect-center pt-4 text-muted">Don't have account?<a id="forget" routerLink="/signup">Sign Up</a></div>
                         </form>

@@ -1,82 +1,52 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { user } from './entity/user';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UsersService {
+  isAdminLogin = new BehaviorSubject<boolean>(true);
+  showSideMenu = new BehaviorSubject<boolean>(false);
 
+  userId!: any;
 
-
-  private baseURL = "http://localhost:9091/user/";
-
-  constructor(private httpClient: HttpClient) { }
-
-  getUsers(): Observable<user[]>{
-    return this.httpClient.get<user[]>(`${this.baseURL}` +'/showAllUser');
+  public setAdminType(isAdmine: boolean) {
+    this.isAdminLogin.next(isAdmine);
   }
 
+  public setSideMenuView(view: boolean) {
+    this.showSideMenu.next(view);
+  }
 
+  setAdminId(rationAdminId: Number) {
+    this.userId = this.userId;
+  }
 
-  // [x: string]: any;
-  //  private baseURL:string = 'http://localhost:9091/user/';
+  private baseURL = 'http://localhost:9091/user/';
 
-  // constructor(private httpClient: HttpClient) { }
-  
+  constructor(private httpClient: HttpClient) {}
 
+  getUsers(): Observable<user[]> {
+    return this.httpClient.get<user[]>(`${this.baseURL}` + '/showAllUser');
+  }
 
-signUp(userObj:any){
-  return this.httpClient.post<any>(`${this.baseURL}createUser`,userObj)
-}
+  signUp(userObj: any) {
+    return this.httpClient.post<any>(`${this.baseURL}createUser`, userObj);
+  }
 
-//basic signup method code ? 
+  login(email: string): Observable<any> {
+    return this.httpClient.get<any>(
+      `${this.baseURL}` + 'userLogin/' + `${email}`
+    );
+  }
 
+  getUserDetails(email : string){
+    return this.httpClient.get<user>(`${this.baseURL}` + 'userLogin/'+ `${email}`);
+  }
 
-
-// }
-
-
-//   public registerUser(userData: any){
-//     return this.httpClient.post(this.API + '/createUser',userData);
-
-//   }
-
-
-  // public getUsers(){
-  //   return this.httpClient.get(`${this.baseURL}showAllUser`);
+  // logout() {
+  //   localStorage.removeItem('currentUser');
   // }
-  
-
-  //  public addUser(Users: User): Observable<Object>{
-  //   return this.httpClient.post(`${this.baseURL}`+'/user/createUser', Users);
-  // }
-
-
-  // public registerUser(userData){
-  //   return this.http.post(this.API + '')
-
-  // }
-  // login(loginObj:any){
-  //   return this.httpClient.post<any>(`${this.baseURL}userLogin`,loginObj)
-  // }
-
-  login(email: string, userPassword: string) {
-    return this.httpClient.post<any>(`${this.baseURL}userLogin`, { email: email, userPassword: userPassword })
-        .pipe(map(user => {
-            // login successful if there's a jwt token in the response
-            if (user && user.token) {
-                // store user details and jwt token in local storage to keep user logged in between page refreshes
-                localStorage.setItem('currentUser', JSON.stringify(user));
-            }
-
-            return user;
-        }));
-}
-
-logout() {
-    // remove user from local storage to log user out
-    localStorage.removeItem('currentUser');
-}
 }

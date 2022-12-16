@@ -16,7 +16,7 @@
   <mat-menu #menu="matMenu" >
       
     <button mat-menu-item routerLink="/profile">My Profile</button>
-    <button mat-menu-item>Logout</button>
+    <button mat-menu-item (click)="onClick()" routerLink="/login">Logout</button>
   </mat-menu>
 
   
@@ -35,3 +35,4 @@
     <mat-icon>share</mat-icon>
   </button> -->
 </mat-toolbar>
+
