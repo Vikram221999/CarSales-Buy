@@ -1,0 +1,28 @@
+<app-navbar></app-navbar>
+
+
+<div class="content">
+  <div fxLayout="row wrap" fxLayoutGap="16px grid">
+    <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let car of carsDetails">
+      <mat-card class="mat-elevation-z4" >
+        <mat-card-header>
+          <mat-card-title> {{car.carName}}</mat-card-title>
+        </mat-card-header>
+        <!-- <img mat-card-image src="./../assets/images/mountains.jpg"> -->
+        <mat-card-content>
+          <p>
+              {{car.carName}}
+              <br>
+              {{car.carModelName}}
+              <br>
+              {{car.yearOfManufacture}}
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button style="color: rgb(16, 19, 19);">Details</button>
+          <!-- <button mat-button>SHARE</button> -->
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+  </div>

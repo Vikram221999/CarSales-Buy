@@ -1,0 +1,37 @@
+<mat-toolbar>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>   Car Sales and Buy</span>
+  <span class="example-spacer"></span>
+  <!-- <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+    <mat-icon>favorite</mat-icon>
+  </button> -->
+
+  <div class="car">
+      <button mat-button routerLink="/addcar" >Add Car</button>
+    </div> 
+
+  <button mat-button [matMenuTriggerFor]="menu"><i class='fa fa-user fa-2x' ></i></button>
+  <mat-menu #menu="matMenu" >
+      
+    <button mat-menu-item routerLink="/profile">My Profile</button>
+    <button mat-menu-item>Logout</button>
+  </mat-menu>
+
+  
+
+ 
+
+    <!-- <div class="example-button-row">
+      <button mat-button routerLink="/signup">SignUp</button>
+    </div>
+    <div class="example-button-row">
+      <button mat-button routerLink="/login">Login</button>
+    </div> -->
+  
+
+  <!-- <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+    <mat-icon>share</mat-icon>
+  </button> -->
+</mat-toolbar>

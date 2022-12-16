@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="card m-5 p-3">
+        <div class="card-body">
+            <h3 style="margin: left 500px; ;">Users Details</h3>
+            <table class="table table-bordered table-striped table-hover">
+              
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Password</th>
+                    <th>Email</th>
+                    <th>Phone number</th>
+                    
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let user of users">
+                    <td>{{ user.userId }}</td>
+                    <td>{{ user.userName }}</td>
+                    <td>{{ user.userPassword }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.mobileNumber }}</td>
+                    
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>

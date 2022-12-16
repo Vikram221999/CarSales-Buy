@@ -1,0 +1,53 @@
+<div class="container">
+    <div class="card m-5 p-3">
+        <div class="card-body">
+            <h3 style="margin: left 500px; ;">Cars Details</h3>
+            <table class="table table-bordered table-striped table-hover">
+              
+                <thead>
+                <tr>
+                    <th>carId</th>
+                    <!-- <th>addId</th>
+                    <th>userId</th> -->
+                    <th>carNumber</th>
+                    <th>carName</th>
+                    <th>FuelType</th>
+                    <th>ownerType</th>
+                    <th>yearOfManufacture</th>
+                    <th>carModelName</th>
+                    <th>gearTransmission</th>
+                    <th>kmDriven</th>
+                    <th>price</th>
+                    <th>Description</th>
+                    <th>premium</th>
+                    <th>registration</th>
+                   
+                    
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let car of carsDetails">
+                    <td>{{ car.carId }}</td>
+                    <!-- <td>{{ car.addId }}</td>
+                    <td>{{ car.userId }}</td> -->
+                    <td>{{ car.carNumber }}</td>
+                    <td>{{ car.carName }}</td>
+                    <td>{{ car.fuelType }}</td>
+                    <td>{{ car.ownerType }}</td>
+                    <td>{{ car.yearOfManufacture }}</td>
+                    <td>{{ car.carModelName }}</td>
+                    <td>{{ car.gearTransmission }}</td>
+                    <td>{{ car.kmDriven }}</td>
+                    <td>{{ car.price }}</td>
+                    <td>{{ car.description }}</td>
+                    <td>{{ car.premium }}</td>
+                    <td>{{ car.registration }}</td>
+                    
+                    
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>

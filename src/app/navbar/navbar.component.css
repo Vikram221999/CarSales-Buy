@@ -1,0 +1,6 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+.mat-toolbar{
+  background-image: linear-gradient(260deg, #51aae6 0%, #e5a7f0 100%);
+}
